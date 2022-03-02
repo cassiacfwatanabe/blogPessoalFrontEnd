@@ -5,14 +5,15 @@ import { Observable } from 'rxjs';
 import { UserLogin } from '../model/UserLogin';
 import { User } from '../model/User';
 
+
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
   constructor(
-    private http:HttpClient
-  ) { }
+    private http: HttpClient
+  ) {  }
 
   entrar(userLogin:UserLogin): Observable<UserLogin>{
     return this.http.post<UserLogin>('http://localhost:8080/usuarios/logar', userLogin)
@@ -22,5 +23,15 @@ export class AuthService {
   cadastrar(usuario:User):Observable<User> {
     return this.http.post<User>('http://localhost:8080/usuarios/cadastrar', usuario)
   }
-  
+
+   logado(){
+
+    let ok: boolean = false
+
+    if(environment.token != ''){
+      ok = true
+    }
+
+    return ok
+   }
 }

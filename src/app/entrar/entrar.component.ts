@@ -26,6 +26,12 @@ export class EntrarComponent implements OnInit {
     this.auth.entrar(this.userLogin).subscribe((resp: UserLogin) =>{
       this.userLogin = resp
       
+       
+      environment.token = this.userLogin.token
+      environment.nome = this.userLogin.nome
+      environment.foto = this.userLogin.foto
+      environment.id = this.userLogin.id
+
       this.router.navigate(['/inicio'])
     }, erro =>{
       if(erro.status == 500 || erro.status == 401){
